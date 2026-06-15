@@ -5,13 +5,13 @@ import logo from "@/assets/veezuals-logo.png";
 export function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="container-x py-16 grid gap-12 md:grid-cols-3">
+      <div className="container-x  py-16 grid gap-12 md:grid-cols-3">
         <div>
          <Link to="/" className="flex items-center font-display text-sm tracking-tight">
             <img
               src={logo}
               alt="Veezuals logo"
-              className="h-25 w-auto object-contain"
+              className="h-25 -ml-5 w-auto object-contain"
             />
             <span className="clash-grotesk-bold text-2xl font-bold -ml-[25px]">
               Veezuals

@@ -17,5 +17,10 @@ export default defineConfig({
     server: {
       allowedHosts: ["veezuals.onrender.com"],
     },
+    build: {
+      rollupOptions: {
+        external: ["@tanstack/query-core"],
+      },
+    },
   },
 });

@@ -54,7 +54,7 @@ function Index() {
              <em className="not-italic text-[#64AEE0]">Crafting Designs</em> that make brands <em className="not-italic text-[#64AEE0]">Look Better,</em> Feel Stronger, and <em className="not-italic text-[#64AEE0]"> Connect Deeper.</em>
             </h1>
           </div>
-          <div className="lg:col-span-4 lg:pb-25 flex flex-col gap-6">
+          <div className="lg:col-span-4 lg:pb-20 flex flex-col gap-6">
             <p className="text-base leading-loose text-muted-foreground max-w-sm">
               I'm Victoria Edochie an independent brand designer working across brand identity, flyers and social media designs. Quietly crafting, loud results.
             </p>
@@ -62,7 +62,7 @@ function Index() {
               <Link to="/contact" className="px-5 py-3 bg-foreground text-background text-sm hover:opacity-50 transition">
                 Book a project
               </Link>
-              <Link to="/services" className="px-5 py-3 border border-foreground text-sm hover:bg-foreground hover:text-background transition">
+              <Link to="/services" className="px-5 py-3 border border-foreground text-sm hover:bg-[#64AEE0]  hover:text-background transition">
                 View services
               </Link>
             </div>
@@ -78,20 +78,20 @@ function Index() {
       <Marquee items={["Brand Identity", "Graphic Design", "Banners", "Logo Design", "Book Design", "Flyers"]} className="bg-[#EDF8FE] text-[#07090A]" />
 
       {/* SERVICES PREVIEW */}
-      <section className="container-x py-24">
+      <section className="container-x py-24 bg-[#64AEE0] text-[#07090A]">
         <div className="flex items-end justify-between mb-16">
           <div>
-            <p className="eyebrow text-[#daf2fe]">What I do</p>
+            <p className="eyebrow text-white">What I do</p>
             <h2 className="display-lg !text-5xl md:!text-6xl mt-4">Services</h2>
           </div>
-          <Link to="/services" className="text-sm underline underline-offset-4 hover:opacity-70">All services →</Link>
+          <Link to="/services" className="text-sm underline text-white underline-offset-4 hover:text-[#07090A]">All services →</Link>
         </div>
         <ul className="divide-y divide-border border-y border-border">
           {services.map((s) => (
-            <li key={s.n} className="grid grid-cols-12 gap-4 py-8 group hover:bg-card/50 transition px-2">
-              <span className="col-span-2 md:col-span-1 text-muted-foreground text-sm">{s.n}</span>
+            <li key={s.n} className="grid cursor-pointer grid-cols-12 gap-4 py-8 group hover:bg-card/50 transition px-2">
+              <span className="col-span-2 md:col-span-1 text-white text-sm">{s.n}</span>
               <span className="col-span-10 md:col-span-5 font-display text-2xl md:text-3xl">{s.t}</span>
-              <span className="col-start-3 md:col-start-7 col-span-10 md:col-span-6 text-muted-foreground text-sm md:text-base">{s.d}</span>
+              <span className="col-start-3 md:col-start-7 col-span-10 md:col-span-6 text-white text-sm md:text-base">{s.d}</span>
             </li>
           ))}
         </ul>
@@ -127,7 +127,7 @@ function Index() {
 
       {/* CTA */}
       <section className="container-x py-32">
-        <div className="border-t border-border pt-16">
+        <div className="">
           <p className="eyebrow text-muted-foreground">Booking design service</p>
           <h2 className="display-lg mt-6 max-w-4xl">Have a <em className="text-blue-200">brand</em>
              <br /> <em className="text-blue-200">worth</em> building?
