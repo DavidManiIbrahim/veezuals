@@ -175,3 +175,7 @@ Drop image files (`.jpg`, `.jpeg`, `.png`) into `src/assets/projects/<Project Na
 ## License
 
 All rights reserved. Brand assets, images, and design work are property of Veezuals / Victoria Edochie.
+
+## screenshots
+
+<img width="932" height="432" alt="{D571EA65-E01B-452F-BBCA-45A90C3A37D8}" src="https://github.com/user-attachments/assets/fef0085e-b2af-4344-9bd8-15196ae0533d" />
