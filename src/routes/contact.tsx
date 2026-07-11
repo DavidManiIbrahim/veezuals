@@ -20,7 +20,7 @@ function ContactPage() {
   return (
     <section className="container-x py-24 bg-[#EDF8FE] text-[#07090A]">
       <p className="eyebrow text-muted-foreground">Contact</p>
-      <h1 className="display-lg mt-6 max-w-4xl">Let's build <em className=" border border-1 border-black-500 p-2 bg-[#07090A] text-[#DAF2FE]"> something </em>
+      <h1 className="display-lg mt-6 max-w-4xl">Let's build <em className="not-italic p-2 text-transparent bg-clip-text bg-gradient-to-r from-[#07090A] to-[#64AEE0] [-webkit-text-stroke:2px_#07090A]"> something </em>
         <br /> that lasts.</h1>
 
       <div className="mt-20 grid lg:grid-cols-12 gap-12">
@@ -109,7 +109,7 @@ ${payload.message}`);
             <label className="eyebrow text-muted-foreground block mb-3">Service of interest</label>
             <select
               name="service"
-              className="w-full bg-[#EDF8FE] border-b border-border py-3 text-base focus:outline-none focus:border-foreground"
+              className="w-full bg-[#EDF8FE] border-b border-[#07090A] py-3 text-base focus:outline-none focus:border-foreground"
             >
               <option className="bg-[#EDF8FE]">Social media design</option>
               <option className="bg-[#EDF8FE]">Flyer design</option>
@@ -155,7 +155,7 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
         name={name}
         type={type}
         required={required}
-        className="w-full bg-transparent border-b border-[#07090A] py-3 text-base focus:outline-none focus:border-foreground"
+        className="w-full bg-[#EDF8FE] border-b border-[#07090A] py-3 text-base focus:outline-none focus:border-foreground"
       />
     </div>
   );

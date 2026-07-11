@@ -7,18 +7,18 @@ export function Footer() {
     <footer className="border-t border-border">
       <div className="container-x  py-16 grid gap-12 md:grid-cols-3">
         <div>
-         <Link to="/" className="flex items-center font-display text-sm tracking-tight">
+         <Link to="/" className="flex items-center gap-1 font-display text-sm tracking-tight">
             <img
               src={logo}
               alt="Veezuals logo"
-              className="h-25 -ml-5 w-auto object-contain"
+              className="h-8 md:h-10 w-auto flex-shrink-0 object-contain"
             />
-            <span className="clash-grotesk-bold text-2xl font-bold -ml-[25px]">
+            <span className="clash-grotesk-bold text-lg md:text-2xl font-bold whitespace-nowrap">
               Veezuals
             </span>
           </Link>
            
-          <p className="-mt-5 text-sm text-muted-foreground max-w-xs">
+          <p className="-mt-5 text-sm text-muted-foreground mt-5 max-w-xs">
             Helping brands look better, feel stronger, and connect deeper through design.
           </p>
         </div>

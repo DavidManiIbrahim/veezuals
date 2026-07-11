@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { KenteRule } from "@/components/site/KenteRule";
 
-const imageModules = import.meta.glob("../assets/projects/**/*.{jpg,jpeg,png}", {
+const imageModules = import.meta.glob("../assets/projects/**/*.{jpg,jpeg,png,webp}", {
   as: "url",
   eager: true,
 });
@@ -45,22 +45,24 @@ export const Route = createFileRoute("/gallery")({
 function GalleryPage() {
   const [selectedProject, setSelectedProject] = useState<{ name: string; images: string[] } | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
+
+  const imageCount = selectedProject?.images.length ?? 0;
 
   const handleNext = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) => (prev + 1) % selectedProject.images.length);
-    }
+    setModalImageLoaded(false);
+    setCurrentImageIndex((prev) => (prev + 1) % imageCount);
   };
 
   const handlePrev = () => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) => (prev - 1 + selectedProject.images.length) % selectedProject.images.length);
-    }
+    setModalImageLoaded(false);
+    setCurrentImageIndex((prev) => (prev - 1 + imageCount) % imageCount);
   };
 
   const handleClose = () => {
     setSelectedProject(null);
     setCurrentImageIndex(0);
+    setModalImageLoaded(false);
   };
 
   return (
@@ -81,17 +83,21 @@ function GalleryPage() {
           {galleryProjects.map((project) => (
             <button
               key={project.name}
+              type="button"
               onClick={() => {
                 setSelectedProject(project);
                 setCurrentImageIndex(0);
+                setModalImageLoaded(false);
               }}
               className="group text-left"
             >
               <div className="aspect-[4/5] bg-card border border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer relative">
-                <img 
-                  src={project.images[0]} 
-                  alt={project.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                <img
+                  src={project.images[0]}
+                  alt={project.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-end p-4">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity">
@@ -107,12 +113,13 @@ function GalleryPage() {
 
       {/* Preview Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-4xl bg-background rounded-lg overflow-hidden flex flex-col max-h-screen">
+        <div className="fixed inset-0 z-[60] bg-black/80 flex flex-col items-center justify-center p-4">
+          <div className="w-full max-w-4xl bg-background rounded-lg overflow-hidden flex flex-col max-h-[90vh]">
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
               <h2 className="font-display text-xl">{selectedProject.name}</h2>
               <button
+                type="button"
                 onClick={handleClose}
                 className="p-2 hover:bg-card rounded transition"
                 aria-label="Close preview"
@@ -122,17 +129,25 @@ function GalleryPage() {
             </div>
 
             {/* Image Preview */}
-            <div className="flex-1 flex items-center justify-center bg-card overflow-hidden">
+            <div className="flex-1 flex items-center justify-center bg-card overflow-hidden relative min-h-[200px]">
+              {!modalImageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="h-8 w-8 border-2 border-muted-foreground border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
               <img
                 src={selectedProject.images[currentImageIndex]}
                 alt={`${selectedProject.name} - ${currentImageIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
+                decoding="async"
+                onLoad={() => setModalImageLoaded(true)}
+                className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${modalImageLoaded ? "opacity-100" : "opacity-0"}`}
               />
             </div>
 
             {/* Navigation */}
-            <div className="flex items-center justify-between p-4 border-t border-border">
+            <div className="flex items-center justify-between p-4 border-t border-border flex-shrink-0">
               <button
+                type="button"
                 onClick={handlePrev}
                 disabled={selectedProject.images.length <= 1}
                 className="p-2 hover:bg-card disabled:opacity-50 disabled:cursor-not-allowed rounded transition"
@@ -144,6 +159,7 @@ function GalleryPage() {
                 {currentImageIndex + 1} / {selectedProject.images.length}
               </p>
               <button
+                type="button"
                 onClick={handleNext}
                 disabled={selectedProject.images.length <= 1}
                 className="p-2 hover:bg-card disabled:opacity-50 disabled:cursor-not-allowed rounded transition"

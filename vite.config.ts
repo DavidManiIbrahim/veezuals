@@ -5,6 +5,7 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import viteImagemin from "vite-plugin-imagemin";
 
 export default defineConfig({
   tanstackStart: {
@@ -22,5 +23,16 @@ export default defineConfig({
         external: ["@tanstack/query-core"],
       },
     },
+    plugins: [
+      viteImagemin({
+        gifsicle: { optimizationLevel: 7 },
+        optipng: { optimizationLevel: 7 },
+        mozjpeg: { quality: 70 },
+        pngquant: { quality: [0.65, 0.8], speed: 4 },
+        svgo: {
+          plugins: [{ name: "removeViewBox" }, { name: "removeEmptyAttrs", active: false }],
+        },
+      }),
+    ],
   },
 });
